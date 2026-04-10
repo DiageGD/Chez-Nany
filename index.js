@@ -1,14 +1,8 @@
-// ========================
-// Éléments
-// ========================
 const slides = document.querySelectorAll('.super-slide');
 const buttons = document.querySelectorAll('.overlay button');
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-// ========================
-// Slideshow (Uniquement si les éléments existent)
-// ========================
 if (slides.length > 0) {
     let activeIndex = 0;
     const autoDelay = 5000;
@@ -38,9 +32,6 @@ if (slides.length > 0) {
     });
 }
 
-// ========================
-// Hamburger menu (Toujours actif)
-// ========================
 if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
@@ -49,14 +40,13 @@ if (navToggle && navLinks) {
 
 function checkOpenStatus() {
     const now = new Date();
-    const day = now.getDay(); // 0 = dimanche, 1 = lundi...
+    const day = now.getDay();
     const hour = now.getHours();
     const minutes = now.getMinutes();
     const currentTime = hour + minutes / 60;
 
     let isOpen = false;
 
-    // Définition des horaires
     const schedule = {
         1: [[12, 14], [19, 22]], // lundi
         2: [[12, 14], [19, 22]], // mardi
@@ -88,6 +78,4 @@ function checkOpenStatus() {
         statusElement.style.color = "red";
     }
 }
-
-// Lancer au chargement
 checkOpenStatus();
