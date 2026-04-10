@@ -40,42 +40,54 @@ if (navToggle && navLinks) {
 
 function checkOpenStatus() {
     const now = new Date();
-    const day = now.getDay();
+    const day = now.getDay(); // 0 = dimanche
+    const date = now.getDate();
+    const month = now.getMonth(); // 0 = janvier, 7 = août
     const hour = now.getHours();
     const minutes = now.getMinutes();
     const currentTime = hour + minutes / 60;
 
     let isOpen = false;
+    let message = "";
 
-    const schedule = {
-        1: [[12, 14], [19, 22]], // lundi
-        2: [[12, 14], [19, 22]], // mardi
-        3: null,                 // mercredi fermé
-        4: [[12, 14], [19, 22]], // jeudi
-        5: [[12, 14], [19, 23]], // vendredi
-        6: [[12, 14], [19, 23]], // samedi
-        0: null                  // dimanche fermé
-    };
+    // ❌ Fermeture annuelle : 3 dernières semaines d'août
+    if (month === 7 && date >= 10) {
+        message = "🔴 Fermé (congés annuels)";
+    }
 
-    const todaySchedule = schedule[day];
+    // ❌ Jours fermés fixes
+    else if (day === 0 || day === 3) {
+        message = "🔴 Fermé aujourd’hui";
+    }
 
-    if (todaySchedule) {
-        for (let period of todaySchedule) {
-            if (currentTime >= period[0] && currentTime <= period[1]) {
-                isOpen = true;
-                break;
+    else {
+        const schedule = {
+            1: [[12, 14], [19, 22]],
+            2: [[12, 14], [19, 22]],
+            4: [[12, 14], [19, 22]],
+            5: [[12, 14], [19, 23]],
+            6: [[12, 14], [19, 23]]
+        };
+
+        const todaySchedule = schedule[day];
+
+        if (todaySchedule) {
+            for (let period of todaySchedule) {
+                if (currentTime >= period[0] && currentTime <= period[1]) {
+                    isOpen = true;
+                    message = "🟢 Ouvert actuellement";
+                    break;
+                }
+            }
+
+            if (!isOpen) {
+                message = "🔴 Fermé actuellement";
             }
         }
     }
 
     const statusElement = document.querySelector(".open-status");
-
-    if (isOpen) {
-        statusElement.textContent = "🟢 Ouvert actuellement";
-        statusElement.style.color = "green";
-    } else {
-        statusElement.textContent = "🔴 Fermé actuellement";
-        statusElement.style.color = "red";
-    }
+    statusElement.textContent = message;
 }
+
 checkOpenStatus();
