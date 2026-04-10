@@ -50,16 +50,18 @@ function checkOpenStatus() {
     let isOpen = false;
     let message = "";
 
-    // ❌ Fermeture annuelle : 3 dernières semaines d'août
     if (month === 7 && date >= 10) {
         message = "🔴 Fermé (congés annuels)";
     }
-
-    // ❌ Jours fermés fixes
+    
+    else if (month === 4 && date >= 1 && date <= 5) {
+        message = "🔴 Fermé (fermeture exceptionnelle)";
+    }
+    
     else if (day === 0 || day === 3) {
         message = "🔴 Fermé aujourd’hui";
     }
-
+    
     else {
         const schedule = {
             1: [[12, 14], [19, 22]],
