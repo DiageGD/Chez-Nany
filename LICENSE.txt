@@ -1,0 +1,3 @@
+All rights reserved.
+This project and its contents are the exclusive property of Chez Nany and Tiago Da Silva.
+Any reproduction, distribution, modification, or use of this code or design without prior written permission is strictly prohibited.
