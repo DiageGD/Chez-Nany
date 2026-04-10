@@ -40,9 +40,9 @@ if (navToggle && navLinks) {
 
 function checkOpenStatus() {
     const now = new Date();
-    const day = now.getDay(); // 0 = dimanche
+    const day = now.getDay();
     const date = now.getDate();
-    const month = now.getMonth(); // 0 = janvier, 7 = août
+    const month = now.getMonth();
     const hour = now.getHours();
     const minutes = now.getMinutes();
     const currentTime = hour + minutes / 60;
