@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Réservation</title>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+  <!-- Ton JS -->
+  <script src="reservation.js" defer></script>
 </head>
 
 <body>
@@ -12,17 +18,11 @@
   <form id="reservationForm">
 
     <input type="text" name="firstname" placeholder="Prénom" required><br><br>
-
     <input type="text" name="lastname" placeholder="Nom" required><br><br>
-
     <input type="date" name="date" required><br><br>
-
     <input type="time" name="time" required><br><br>
-
     <input type="number" name="people" placeholder="Nombre de personnes" required><br><br>
-
     <input type="email" name="email" placeholder="Email" required><br><br>
-
     <input type="tel" name="phone" placeholder="Téléphone" required><br><br>
 
     <button type="submit">Réserver</button>
@@ -30,13 +30,6 @@
   </form>
 
   <p id="message"></p>
-
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script>
-  alert("JS INLINE OK");
-  </script>
 
 </body>
 </html>
