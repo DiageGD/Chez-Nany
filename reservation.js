@@ -1,6 +1,5 @@
-alert("JS CHARGÉ !");
 const SUPABASE_URL = "https://mcyadykysjwlwfnrplqs.supabase.co";
-const SUPABASE_KEY = "sb_publishable_2ZvOjfwMvQ61KDbkrJfuOw_AxY5Qbns";
+const SUPABASE_KEY = "sb_publishable_VMQE7cuXKGZ7A7mkyTAQ-A_QKtDg4Ae";
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -28,13 +27,10 @@ form.addEventListener("submit", async (e) => {
     // 🔢 compter les réservations du jour
     const { data: existing, error: fetchError } = await supabase
       .from("reservations")
-      .select("*")
+      .select("id")
       .eq("date", data.date);
 
-    if (fetchError) {
-      alert("❌ FETCH ERROR: " + fetchError.message);
-      throw fetchError;
-    }
+    if (fetchError) throw fetchError;
 
     data.number = (existing?.length || 0) + 1;
 
@@ -44,20 +40,16 @@ form.addEventListener("submit", async (e) => {
       .insert([data])
       .select();
 
-    if (insertError) {
-      alert("❌ INSERT ERROR: " + insertError.message);
-      throw insertError;
-    }
+    if (insertError) throw insertError;
 
-    alert("🎉 RÉSERVATION OK ! Numéro : " + data.number);
-
-    message.textContent = `Réservation confirmée 🎉 Numéro : ${data.number}`;
+    // ✅ SUCCESS
+    message.textContent = `🎉 Réservation confirmée ! Numéro : ${data.number}`;
     form.reset();
 
     console.log("INSERT SUCCESS:", insertData);
 
   } catch (err) {
-    console.error("FULL ERROR:", err);
-    message.textContent = "Erreur lors de la réservation ❌";
+    console.error("Reservation error:", err);
+    message.textContent = "❌ Erreur lors de la réservation. Réessayez.";
   }
 });
