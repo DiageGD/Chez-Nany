@@ -30,22 +30,33 @@ form.addEventListener("submit", async (e) => {
       .select("*")
       .eq("date", data.date);
 
-    if (fetchError) throw fetchError;
+    if (fetchError) {
+      alert("❌ FETCH ERROR: " + fetchError.message);
+      throw fetchError;
+    }
 
     data.number = (existing?.length || 0) + 1;
 
     // 💾 insertion
-    const { error } = await supabase
+    const { data: insertData, error: insertError } = await supabase
       .from("reservations")
-      .insert([data]);
+      .insert([data])
+      .select();
 
-    if (error) throw error;
+    if (insertError) {
+      alert("❌ INSERT ERROR: " + insertError.message);
+      throw insertError;
+    }
+
+    alert("🎉 RÉSERVATION OK ! Numéro : " + data.number);
 
     message.textContent = `Réservation confirmée 🎉 Numéro : ${data.number}`;
     form.reset();
 
+    console.log("INSERT SUCCESS:", insertData);
+
   } catch (err) {
-    console.error(err);
+    console.error("FULL ERROR:", err);
     message.textContent = "Erreur lors de la réservation ❌";
   }
 });
