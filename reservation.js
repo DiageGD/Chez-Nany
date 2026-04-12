@@ -1,5 +1,3 @@
-alert("JS FILE LOADED");
-
 window.addEventListener("DOMContentLoaded", () => {
 
   if (!window.supabase) {
@@ -23,8 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    alert("🚀 Submit détecté");
-
     const formData = new FormData(form);
 
     const data = {
@@ -44,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
         .eq("date", data.date);
 
       if (fetchError) {
-        alert("❌ FETCH ERROR: " + fetchError.message);
+        message.textContent = "❌ Erreur lors de la vérification des réservations";
         return;
       }
 
@@ -55,18 +51,18 @@ window.addEventListener("DOMContentLoaded", () => {
         .insert([data]);
 
       if (insertError) {
-        alert("❌ INSERT ERROR: " + insertError.message);
+        message.textContent = "❌ Erreur lors de la réservation";
         return;
       }
 
-      alert("🎉 RÉSERVATION OK ! Numéro : " + data.number);
+      // 🎉 SUCCESS CLEAN
+      message.textContent = `🍽️ Réservation confirmée ! Numéro : ${data.number}`;
 
-      message.textContent = `Réservation confirmée 🎉 Numéro : ${data.number}`;
       form.reset();
 
     } catch (err) {
-      alert("💥 ERROR JS: " + err.message);
       console.error(err);
+      message.textContent = "❌ Erreur inattendue";
     }
   });
 
