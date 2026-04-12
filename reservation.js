@@ -1,3 +1,4 @@
+alert("JS FILE LOADED");
 const SUPABASE_URL = "https://mcyadykysjwlwfnrplqs.supabase.co";
 const SUPABASE_KEY = "sb_publishable_VMQE7cuXKGZ7A7mkyTAQ-A_QKtDg4Ae";
 
