@@ -4,6 +4,9 @@ const SUPABASE_KEY = "sb_publishable_VMQE7cuXKGZ7A7mkyTAQ-A_QKtDg4Ae";
 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+if (!window.supabase) {
+  alert("❌ Supabase non chargé");
+}
 window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("reservationForm");
   const message = document.getElementById("message");
