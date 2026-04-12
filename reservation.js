@@ -1,13 +1,17 @@
 alert("JS FILE LOADED");
-const SUPABASE_URL = "https://mcyadykysjwlwfnrplqs.supabase.co";
-const SUPABASE_KEY = "sb_publishable_VMQE7cuXKGZ7A7mkyTAQ-A_QKtDg4Ae";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-if (!window.supabase) {
-  alert("❌ Supabase non chargé");
-}
 window.addEventListener("DOMContentLoaded", () => {
+
+  if (!window.supabase) {
+    alert("❌ Supabase non chargé");
+    return;
+  }
+
+  const SUPABASE_URL = "https://mcyadykysjwlwfnrplqs.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_VMQE7cuXKGZ7A7mkyTAQ-A_QKtDg4Ae";
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
   const form = document.getElementById("reservationForm");
   const message = document.getElementById("message");
 
@@ -17,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // 🔥 empêche reload
+    e.preventDefault();
 
     alert("🚀 Submit détecté");
 
@@ -34,7 +38,6 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      // 🔢 compter les réservations du jour
       const { data: existing, error: fetchError } = await supabase
         .from("reservations")
         .select("id")
@@ -47,7 +50,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
       data.number = (existing?.length || 0) + 1;
 
-      // 💾 insertion
       const { error: insertError } = await supabase
         .from("reservations")
         .insert([data]);
@@ -59,10 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       alert("🎉 RÉSERVATION OK ! Numéro : " + data.number);
 
-      if (message) {
-        message.textContent = `Réservation confirmée 🎉 Numéro : ${data.number}`;
-      }
-
+      message.textContent = `Réservation confirmée 🎉 Numéro : ${data.number}`;
       form.reset();
 
     } catch (err) {
@@ -70,4 +69,5 @@ window.addEventListener("DOMContentLoaded", () => {
       console.error(err);
     }
   });
+
 });
