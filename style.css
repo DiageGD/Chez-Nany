@@ -488,3 +488,86 @@ iframe {
     font-weight: 600;
     font-family: "Crimson Text", sans-serif;
 }
+
+/* ===== MAIN CONTAINER ===== */
+.home {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: #0f0f0f;
+}
+
+/* ===== TITLE ===== */
+.home h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ===== FORM CARD ===== */
+#reservationForm {
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ===== INPUTS ===== */
+#reservationForm input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #2a2a2a;
+    color: white;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+#reservationForm input::placeholder {
+    color: #aaa;
+}
+
+#reservationForm input:focus {
+    background: #333;
+    box-shadow: 0 0 0 2px #ff4d6d;
+}
+
+/* ===== BUTTON ===== */
+#reservationForm button {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#reservationForm button:hover {
+    background: #ff2e55;
+    transform: translateY(-2px);
+}
+
+/* ===== MESSAGE ===== */
+#message {
+    margin-top: 20px;
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+#reservationForm {
+    backdrop-filter: blur(10px);
+}
