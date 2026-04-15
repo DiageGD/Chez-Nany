@@ -1,0 +1,573 @@
+/* ========================================================= VARIABLES GLOBALES ========================================================= */
+:root {
+    --bg: #f0e6d2;
+    --bg2: #e0d4b8;
+    --txt: #000000;
+    --deco-hover: rgba(0, 0, 0, 0.2);
+    --overlay-width-desktop: 40%;
+    --overlay-width-mobile: 60%;
+}
+
+/* ========================================================= BASE / BODY / DARK MODE ========================================================= */
+html {
+    color-scheme: light dark;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Crimson Text', serif;
+    font-size: 1.2em;
+    color: var(--txt);
+    background-color: var(--bg);
+    background-image: url('assets/wood_texture.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.95;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Parisienne', cursive;
+    font-size: 2.5em;
+    margin: 0 0 10px 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #121212;
+        --bg2: #1e1e1e;
+        --txt: #efefef;
+    }
+
+    body {
+        --deco-hover: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* ========================================================= NAVIGATION ========================================================= */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    height: 140px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 100;
+    background-color: var(--bg);
+    color: var(--txt);
+}
+
+/* ======================== LOGO ======================== */
+.logo img {
+    height: 125px;
+    transition: opacity 0.3s ease;
+}
+
+.logo-light {
+    display: inline;
+}
+
+.logo-dark {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo-light {
+        display: none;
+    }
+
+    .logo-dark {
+        display: inline;
+    }
+}
+
+/* ======================== NAV LINKS ======================== */
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    font-size: 1.3em;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 12px;
+    border-radius: 3px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ======================== HAMBURGER ======================== */
+.nav-toggle {
+    display: none;
+    font-size: 2.5em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* ========================================================= SLIDESHOW ========================================================= */
+.super-slides {
+    position: relative;
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.super-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 0;
+}
+
+.super-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.super-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Ajustement images spécifiques */
+.Terrasse {
+    object-position: 100% 80%;
+}
+
+.Intérieur {
+    object-position: 100% 60%;
+}
+
+.Comptoir {
+    object-position: 0% 30%;
+}
+
+/* ======================== OVERLAY ======================== */
+.super-slide .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--overlay-width-desktop);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    color: inherit;
+    z-index: 3;
+    background: linear-gradient(to right, var(--bg) 30%, rgba(255, 255, 255, 0) 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .super-slide .overlay {
+        background: linear-gradient(to right, var(--bg) 30%, rgba(18, 18, 18, 0) 100%);
+    }
+}
+
+/* ========================================================= BUTTONS ========================================================= */
+button,
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 1.2em;
+    font-weight: 600;
+    font-family: 'Parisienne', cursive;
+    color: #fff;
+    background: linear-gradient(135deg, #ff8a65, #ff5722);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ff7043, #f4511e);
+}
+
+/* Hitbox bouton (IMPORTANT) */
+.super-slide .overlay button a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ========================================================= SECTIONS SPLIT (TEXTE + IMAGE) ========================================================= */
+.split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 10px 5%;
+}
+
+.split.reverse {
+    flex-direction: row-reverse;
+}
+
+.split-text {
+    flex: 1;
+}
+
+.split-text h2 {
+    margin-bottom: 20px;
+}
+
+.split-image {
+    flex: 1;
+}
+
+.split-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+}
+
+main.about {
+    background: var(--bg);
+    min-height: 100vh;
+    width: 100%;
+}
+
+.split {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================================= FOOTER ========================================================= */
+footer {
+    display: grid;
+    text-align: center;
+    padding: 15px 0;
+    background-color: inherit;
+    color: inherit;
+}
+
+footer a {
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+footer a:hover {
+    opacity: 0.7;
+}
+
+/* ========================================================= 📱 RESPONSIVE MOBILE (TOUT À LA FIN) ========================================================= */
+@media (max-width: 600px) {
+    /* NAV EN GRID */
+    .main-nav {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        align-items: center;
+        padding: 10px 15px;
+        height: auto;
+    }
+
+    .logo {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .nav-toggle {
+        display: block;
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+    }
+
+    .nav-links {
+        grid-column: 1 / 3;
+        grid-row: 2;
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: left;
+        padding: 12px 0;
+    }
+
+    /* SLIDESHOW */
+    .super-slides {
+        height: calc(100vh - 80px);
+    }
+
+    .super-slide .overlay {
+        width: var(--overlay-width-mobile);
+        padding: 10px;
+    }
+
+    .split {
+        flex-direction: column;
+    }
+
+    .split.reverse {
+        flex-direction: column;
+    }
+
+    /* HERO */
+    .hero-contact {
+        height: 40vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}
+
+.contact-page {
+    background: var(--bg);
+    min-height: 100vh;
+    width: 100%;
+}
+
+.hero-contact {
+    position: relative;
+    height: 60vh;
+    background: url("assets/hero.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-contact .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content {
+    position: relative;
+    color: var(--txt);
+}
+
+.hero-content h1 {
+    font-family: "Parisienne", cursive;
+    font-size: 4rem;
+}
+
+.hero-content p {
+    font-family: "Crimson Text", sans-serif;
+    font-size: 1.2rem;
+}
+
+/* MAP */
+.map-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.map-container {
+    margin-top: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+/* INFOS */
+.infos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+    flex-wrap: wrap;
+}
+
+iframe {
+    margin-bottom: 50px;
+}
+
+.info-card {
+    background: var(--bg2);
+    padding: 25px;
+    border-radius: 15px;
+    width: 250px;
+    min-height: 150px;
+    display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    color: var(--txt);
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+}
+
+.hours p {
+    margin: 10px 0;
+    font-family: "Inter", sans-serif;
+}
+
+.hours strong {
+    font-weight: 600;
+}
+
+/* SOCIALS */
+.socials {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    background: black;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.1);
+    background: #ff4d6d;
+}
+
+.open-status {
+    margin-top: 10px;
+    font-weight: 600;
+    font-family: "Crimson Text", sans-serif;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.home {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: var(--bg);
+}
+
+/* ===== TITLE ===== */
+.home h1 {
+    color: var(--txt);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ===== FORM CARD ===== */
+#reservationForm {
+    background: var(--bg2);
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ===== INPUTS ===== */
+#reservationForm input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: var(--bg);
+    color: var(--txt);
+    font-size: 1rem;
+    transition: 0.2s;
+}
+
+#reservationForm input::placeholder {
+    color: var(--txt);
+}
+
+#reservationForm input:focus {
+    background: var(--bg2);
+    box-shadow: 0 0 0 2px #ff4d6d;
+}
+
+/* ===== BUTTON ===== */
+#reservationForm button {
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4d6d;
+    color: var(--txt);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#reservationForm button:hover {
+    background: #ff2e55;
+    transform: translateY(-2px);
+}
+
+/* ===== MESSAGE ===== */
+#message {
+    margin-top: 20px;
+    color: var(--txt);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+#reservationForm {
+    backdrop-filter: blur(10px);
+}

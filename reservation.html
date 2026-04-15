@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Réservation</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Parisienne&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Parisienne&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script> 
+    <script src="./reservation.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <nav class="main-nav">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo-light.png" alt="Logo clair" class="logo-light">
+                    <img src="assets/logo-dark.png" alt="Logo foncé" class="logo-dark">
+                </a>
+            </div>
+            <button class="nav-toggle">☰</button>
+            <div class="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="about.html">Présentation du restaurant</a>
+                <a href="assets/Menu.pdf" target="_blank">Voir la carte</a>
+                <a href="reservation.html">Réserver une table</a>
+                <a href="contact.html">Où nous trouver ?</a>
+            </div>
+        </nav>
+    </header>
+    <main class="home">
+        <h1>Réserver une table</h1>
+
+        <form id="reservationForm">
+      
+          <input type="text" name="firstname" placeholder="Prénom" required><br><br>
+          <input type="text" name="lastname" placeholder="Nom" required><br><br>
+          <input type="date" name="date" required><br><br>
+          <input type="time" name="time" required><br><br>
+          <input type="number" name="people" placeholder="Nombre de personnes" required><br><br>
+          <input type="email" name="email" placeholder="Email" required><br><br>
+          <input type="tel" name="phone" placeholder="Téléphone" required><br><br>
+      
+          <button type="submit">Réserver</button>
+      
+        </form>
+
+        <p id="message"></p>
+    </main>
+    <footer>
+        <p>
+            © 2026 — Site web réalisé par 
+            <a href="https://diagegd.github.io/portfolio" target="_blank">
+                Tiago Da Silva
+            </a>.
+            Les droits d'exploitation du site sont détenus par le restaurant 
+            <a href="index.html">
+                Chez Nany
+            </a>.
+            
+        </p>
+    </footer>
+
+</body>
+</html>
