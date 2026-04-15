@@ -1,7 +1,7 @@
 /* ========================================================= VARIABLES GLOBALES ========================================================= */
 :root {
-    --bg: #d6ca84;
-    --bg2: #c9b46a;
+    --bg: #f0e6d2;
+    --bg2: #e0d4b8;
     --txt: #000000;
     --deco-hover: rgba(0, 0, 0, 0.2);
     --overlay-width-desktop: 40%;
@@ -389,7 +389,7 @@ footer a:hover {
 
 .hero-content {
     position: relative;
-    color: white;
+    color: var(--txt);
 }
 
 .hero-content h1 {
@@ -497,12 +497,12 @@ iframe {
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
-    background: #0f0f0f;
+    background: var(--bg);
 }
 
 /* ===== TITLE ===== */
 .home h1 {
-    color: white;
+    color: var(--txt);
     font-size: 2.5rem;
     margin-bottom: 30px;
     text-align: center;
@@ -510,7 +510,7 @@ iframe {
 
 /* ===== FORM CARD ===== */
 #reservationForm {
-    background: #1a1a1a;
+    background: var(--bg2);
     padding: 30px;
     border-radius: 16px;
     width: 100%;
@@ -527,18 +527,18 @@ iframe {
     border-radius: 8px;
     border: none;
     outline: none;
-    background: #2a2a2a;
-    color: white;
+    background: var(--bg);
+    color: var(--txt);
     font-size: 1rem;
     transition: 0.2s;
 }
 
 #reservationForm input::placeholder {
-    color: #aaa;
+    color: var(--txt);
 }
 
 #reservationForm input:focus {
-    background: #333;
+    background: var(--bg2);
     box-shadow: 0 0 0 2px #ff4d6d;
 }
 
@@ -549,7 +549,7 @@ iframe {
     border: none;
     border-radius: 8px;
     background: #ff4d6d;
-    color: white;
+    color: var(--txt);
     font-size: 1rem;
     cursor: pointer;
     transition: 0.2s;
@@ -563,7 +563,7 @@ iframe {
 /* ===== MESSAGE ===== */
 #message {
     margin-top: 20px;
-    color: white;
+    color: var(--txt);
     font-size: 1.1rem;
     text-align: center;
 }
