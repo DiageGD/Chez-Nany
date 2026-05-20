@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Mon Compte - Chez Nany</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Parisienne&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900&family=Parisienne&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              src="assets/logo-light.png"
+              alt="Logo clair"
+              class="logo-light"
+            />
+            <img
+              src="assets/logo-dark.png"
+              alt="Logo foncé"
+              class="logo-dark"
+            />
+          </a>
+        </div>
+
+        <div class="nav-links">
+          <a href="index.html">Accueil</a>
+          <a href="about.html">Présentation du restaurant</a>
+          <a href="assets/Menu.pdf" target="_blank">Voir la carte</a>
+          <a href="reservation.html">Réserver une table</a>
+          <a href="contact.html">Où nous trouver ?</a>
+        </div>
+
+        <a id="navLogoLink" class="nav-logo" href="#">
+          <img src="assets/account.png" alt="Compte client" class="nav-logo-img">
+        </a>
+
+        <button class="nav-toggle">☰</button>
+      </nav>
+    </header>
+
+    <main class="auth-container">
+      <div class="auth-box">
+        <h2>Chez Nany</h2>
+        <h1>Réserver une table</h1>
+        <p class="auth-subtitle">Réservez votre moment d'exception en quelques instants.</p>
+        
+        <form id="reservationForm">
+          <div class="auth-input-group">
+            <input type="text" id="firstname" name="firstname" placeholder="Prénom" required />
+          </div>
+          
+          <div class="auth-input-group">
+            <input type="text" id="lastname" name="lastname" placeholder="Nom" required />
+          </div>
+
+          <div class="auth-input-group">
+            <input type="email" id="email" name="email" placeholder="Adresse email" required />
+          </div>
+
+          <div class="auth-input-group">
+            <input type="tel" id="phone" name="phone" placeholder="Numéro de téléphone" required />
+          </div>
+
+          <div class="auth-input-group">
+            <input type="number" id="people" name="people" placeholder="Nombre de personnes" min="1" max="10" required />
+          </div>
+          
+          <div class="form-divider"><span>Le moment de votre visite</span></div>
+
+          <div class="auth-input-group date-wrapper">
+            <input type="date" id="date" name="date" required />
+          </div>
+          
+          <div class="auth-input-group select-wrapper">
+            <select id="time" name="time" required>
+              <option value="" disabled selected>Choisir un créneau horaire...</option>
+            </select>
+          </div>
+
+          <button type="submit" class="auth-submit-button">Confirmer la réservation</button>
+        </form>
+
+        <p id="message" class="auth-message"></p>
+      </div>
+    </main>
+    
+    <footer>
+      <p>
+        © 2026 — Site web réalisé par
+        <a href="https://diagegd.github.io/portfolio" target="_blank">
+          Tiago Da Silva </a
+        >. Les droits d'exploitation du site sont détenus par le restaurant
+        <a href="index.html"> Chez Nany </a>.
+      </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="reservation.js"></script>
+  </body>
+</html>
