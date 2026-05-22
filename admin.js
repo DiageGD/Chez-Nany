@@ -151,8 +151,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             adminResMessage.textContent = "";
 
-            let slots = ["12:00", "12:30", "19:00", "19:30", "20:00", "20:30"];
-            if (dayOfWeek === 5 || dayOfWeek === 6) slots.push("21:00", "21:30");
+            let slots = [
+                "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30",
+                "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30"
+            ];
+            if (dayOfWeek === 5 || dayOfWeek === 6) slots.push("21:45", "22:00");
 
             adminTimeSelect.innerHTML = slots.map(slot => `<option value="${slot}">${slot.replace(":", "h")}</option>`).join("");
         });
