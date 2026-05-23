@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (dayOfWeek === 0 || dayOfWeek === 3) {
         setMessage("❌ Le restaurant est fermé le mercredi et le dimanche.", "error");
+        alert("Le restaurant est fermé le mercredi et le dimanche. Veuillez choisir une autre date.");
         dateInput.value = "";
         timeSelect.innerHTML = '<option value="">Sélectionnez d\'abord une date...</option>';
         return;
