@@ -6,13 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let slideInterval;
 
-  // ===================== 📱 MENU DE NAVIGATION MOBILE =====================
-  if (navToggle && navLinks) {
-    navToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-    });
-  }
-
   // ===================== 🎞️ SLIDESHOW (HERO CAROUSEL) =====================
   if (slides.length > 0) {
     let activeIndex = 0;
