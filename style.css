@@ -32,6 +32,12 @@ html {
 /* =========================================================
    🧱 BASE
 ========================================================= */
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -61,17 +67,18 @@ h3 {
 }
 
 /* =========================================================
-   🧭 NAVIGATION
+   🧭 NAVIGATION (FIX PLEINE LARGEUR)
 ========================================================= */
 .main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 15px 20px;
   height: 140px;
   position: sticky;
   top: 0;
   width: 100%;
+  max-width: 100vw;
   box-sizing: border-box;
   z-index: 100;
   background-color: var(--bg);
@@ -554,6 +561,7 @@ footer a:hover {
     align-items: center;
     padding: 10px 15px;
     height: auto;
+    width: 100%; /* S'assure de bien s'étirer */
   }
 
   /* 🍽 LOGO RESTO */
