@@ -44,83 +44,85 @@
       </nav>
     </header>
 
-    <div class="account-container admin-wide">
-        <section class="profile-box">
-            <h2>Mon Profil</h2>
-            <form id="profileUpdateForm">
-                <div class="form-group">
-                    <label>Prénom</label>
-                    <input type="text" id="userFirstName" required />
-                </div>
-                <div class="form-group">
-                    <label>Nom</label>
-                    <input type="text" id="userLastName" required />
-                </div>
-                <div class="form-group">
-                    <label>Téléphone</label>
-                    <input type="tel" id="userPhone" required />
-                </div>
-                <button type="submit" class="btn-premium" style="font-size:0.85em; padding:10px;">Sauvegarder le profil</button>
-            </form>
+    <main style="display: flex; align-items: center; justify-content: center; width: 100%;">
+      <div class="account-container admin-wide" style="margin: 40px auto;">
+          <section class="profile-box">
+              <h2>Mon Profil</h2>
+              <form id="profileUpdateForm" style="background: transparent; padding: 0; box-shadow: none; max-width: 100%;">
+                  <div class="form-group">
+                      <label>Prénom</label>
+                      <input type="text" id="userFirstName" required />
+                  </div>
+                  <div class="form-group">
+                      <label>Nom</label>
+                      <input type="text" id="userLastName" required />
+                  </div>
+                  <div class="form-group">
+                      <label>Téléphone</label>
+                      <input type="tel" id="userPhone" required />
+                  </div>
+                  <button type="submit" class="btn-premium" style="font-size:0.85em; padding:10px;">Sauvegarder le profil</button>
+              </form>
 
-            <hr style="margin: 30px 0; border: 0; border-top: 1px solid rgba(240, 230, 210, 0.15);" />
+              <hr style="margin: 30px 0; border: 0; border-top: 1px solid rgba(240, 230, 210, 0.15);" />
 
-            <form id="passwordUpdateForm">
-                <h3>Sécurité & Mot de passe</h3>
-                <div class="form-group">
-                    <input type="password" id="newPassword" placeholder="Nouveau mot de passe" required />
-                </div>
-                <button type="submit" class="btn-premium" style="font-size:0.85em; padding:10px; background: transparent; border: 1px solid #f0e6d2; color: #f0e6d2;">Modifier le mot de passe</button>
-            </form>
+              <form id="passwordUpdateForm" style="background: transparent; padding: 0; box-shadow: none; max-width: 100%;">
+                  <h3>Sécurité & Mot de passe</h3>
+                  <div class="form-group">
+                      <input type="password" id="newPassword" placeholder="Nouveau mot de passe" required />
+                  </div>
+                  <button type="submit" class="btn-premium" style="font-size:0.85em; padding:10px; background: transparent; border: 1px solid #f0e6d2; color: #f0e6d2;">Modifier le mot de passe</button>
+              </form>
 
-            <p id="profileMessage" style="margin-top: 15px; font-family:'Inter', sans-serif; font-size: 0.9em;"></p>
-            
-            <button id="logoutBtn" class="btn-danger-outline" style="width: 100%; margin-top: 20px; padding: 12px;">Se déconnecter de l'espace</button>
-        </section>
+              <p id="profileMessage" style="margin-top: 15px; font-family:'Inter', sans-serif; font-size: 0.9em;"></p>
+              
+              <button id="logoutBtn" class="btn-danger-outline" style="width: 100%; margin-top: 20px; padding: 12px;">Se déconnecter de l'espace</button>
+          </section>
 
-        <section class="reservations-box">
-            <h2>Mes Réservations</h2>
-            <ul id="clientReservationsList" style="list-style: none; padding: 0; font-family: 'Inter', sans-serif; color: #e0d4b8;">
-                <li style="padding: 10px 0; border-bottom: 1px solid rgba(240, 230, 210, 0.1);">Chargement de vos réservations en cours...</li>
-            </ul>
+          <section class="reservations-box">
+              <h2>Mes Réservations</h2>
+              <ul id="clientReservationsList" style="list-style: none; padding: 0; font-family: 'Inter', sans-serif; color: #e0d4b8;">
+                  <li style="padding: 10px 0; border-bottom: 1px solid rgba(240, 230, 210, 0.1);">Chargement de vos réservations en cours...</li>
+              </ul>
 
-            <div id="adminSection" style="display: none; margin-top: 40px; border-top: 2px dashed rgba(240, 230, 210, 0.2); padding-top: 20px;">
-                <h2 style="font-size: 2em; color: #f39c12;">Espace Restaurateur</h2>
-                
-                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <h3 style="margin-top: 0;">Ajouter une réservation (Téléphone)</h3>
-                    <form id="adminInsertReservationForm" style="display: grid; gap: 10px;">
-                        <input type="date" id="adminResDate" required />
-                        <select id="adminResTime" required>
-                            <option value="">Sélectionnez une heure...</option>
-                        </select>
-                        <input type="number" id="adminResPeople" placeholder="Nombre de couverts" min="1" required />
-                        <input type="text" id="adminResNote" placeholder="Nom du client" required />
-                        <button type="submit" class="btn-premium" style="background: #2ecc71; color:#fff;">Inscrire sur le cahier</button>
-                    </form>
-                    <p id="adminResMessage"></p>
-                </div>
+              <div id="adminSection" style="display: none; margin-top: 40px; border-top: 2px dashed rgba(240, 230, 210, 0.2); padding-top: 20px;">
+                  <h2 style="font-size: 2em; color: #f39c12;">Espace Restaurateur</h2>
+                  
+                  <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                      <h3 style="margin-top: 0; color: #f0e6d2;">Ajouter une réservation (Téléphone)</h3>
+                      <form id="adminInsertReservationForm" style="display: grid; gap: 10px; background: transparent; padding: 0; box-shadow: none; max-width: 100%;">
+                          <input type="date" id="adminResDate" required />
+                          <select id="adminResTime" required style="width: 100%;">
+                              <option value="">Sélectionnez une heure...</option>
+                          </select>
+                          <input type="number" id="adminResPeople" placeholder="Nombre de couverts" min="1" required />
+                          <input type="text" id="adminResNote" placeholder="Nom du client" required />
+                          <button type="submit" class="btn-premium" style="background: #2ecc71; color:#fff;">Inscrire sur le cahier</button>
+                      </form>
+                      <p id="adminResMessage"></p>
+                  </div>
 
-                <h3>Toutes les réservations du restaurant</h3>
-                <div class="admin-table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Heure</th>
-                                <th>Couverts</th>
-                                <th>Client / Note</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="adminTableBody">
-                            <tr><td colspan="5">Chargement du registre...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </div>
+                  <h3 style="color: #f0e6d2;">Toutes les réservations</h3>
+                  <div class="admin-table-wrapper">
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Date</th>
+                                  <th>Heure</th>
+                                  <th>Couverts</th>
+                                  <th>Client / Note</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody id="adminTableBody">
+                              <tr><td colspan="5">Chargement du registre...</td></tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </section>
+      </div>
+    </main>
 
     <footer>
       <p>
