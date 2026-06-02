@@ -38,7 +38,7 @@ body {
   font-family: "Crimson Text", serif;
   font-size: 1.15em; /* Un poil plus grand pour le confort de lecture */
   color: var(--txt);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("assets/wood_texture.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("assets/wood_texture.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
