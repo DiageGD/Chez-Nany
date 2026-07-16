@@ -19,7 +19,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 2. LOGIQUE DES CRÉNEAUX HORAIRES (S'exécute toujours pour que l'interface réponde)
   if (dateInput && timeSelect) {
     dateInput.addEventListener("change", () => {
-      const dateSelected = new Date(dateInput.value);
+      if (!dateInput.value) return; // Sécurité si l'input est vidé
+
+      // 🛠️ FIX FUSEAU HORAIRE : On découpe manuellement "YYYY-MM-DD" pour forcer l'heure locale
+      const [year, month, day] = dateInput.value.split("-").map(Number);
+      const dateSelected = new Date(year, month - 1, day);
       const dayOfWeek = dateSelected.getDay(); // 0 = Dimanche, 3 = Mercredi
 
       timeSelect.innerHTML = "";
@@ -142,7 +146,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       let tablesDe2Dispos = 3;
       let reservationPossible = true;
 
-      // 🔥 CORRECTION ICI : Changement de "du" par "of" et mise au singulier pour correspondre au bloc
       for (let personnes of groupesPresents) {
         let placesAFormes = personnes;
 
@@ -170,19 +173,18 @@ document.addEventListener("DOMContentLoaded", async () => {
           placesAFormes -= 4;
         }
 
-        // Si après tout ça, placesAFormes est toujours > 0, c'est que le groupe ne rentre pas !
         if (placesAFormes > 0) {
           reservationPossible = false;
-          break; // Pas la peine de tester le reste, le resto est bloqué
+          break;
         }
       }
 
-      // 4. VERDICT
+      // 4. Soumission
       if (!reservationPossible) {
         return setMessage(`❌ Désolé, la configuration de nos tables (10 tables de 4 et 3 tables de 2) ne permet pas d'accueillir ${nouvellesPlaces} personne(s) de plus à cet horaire.`, "error");
       }
 
-      // Tout est OK, le Tetris des tables est validé ! On insère en BDD
+      
       const { error: insertError } = await supabase.from("reservations").insert([{
         date: selectedDate, 
         time: `${selectedTime}:00`, 
