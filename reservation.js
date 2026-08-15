@@ -1,4 +1,4 @@
-alert("Le restaurant est fermé et ne réouvrira ses portes que le 3 septembre, merci de ne pas réserver de table pour avant cette date (ou la réservation sera supprimée).")
+alert("Le restaurant est fermé et ne réouvrira ses portes que le 3 septembre, merci de ne pas réserver de table pour avant cette date (ou la réservation sera supprimée). De plus le site est actuellement en maintenance pour plus de sécurité pour vos données, aucune réservation n'est actuellement faisable.")
 document.addEventListener("DOMContentLoaded", async () => {
   const supabase = window.supabaseClient || window.supabase || supabaseClient;
   if (!supabase) return;
