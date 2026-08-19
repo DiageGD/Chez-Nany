@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mes Réservations - Chez Nany</title>
+    <link rel="icon" type="image/jpeg" href="./assets/logo.jpg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <header>
+      <nav class="main-nav">
+        <div class="logo">
+          <a href="index.html">
+            <img src="assets/logo-light.png" alt="Logo clair" class="logo-light" />
+            <img src="assets/logo-dark.png" alt="Logo foncé" class="logo-dark" />
+          </a>
+        </div>
+
+        <div class="nav-links">
+          <a href="index.html">Accueil</a>
+          <a href="about.html">Présentation du restaurant</a>
+          <a href="assets/Menu.pdf" target="_blank">Voir la carte</a>
+          <a href="reservation.html">Réserver une table</a>
+          <a href="contact.html">Où nous trouver ?</a>
+          <a href="espace_client.html">Mon espace</a>
+        </div>
+
+        <button class="nav-toggle">☰</button>
+      </nav>
+    </header>
+
+    <main style="padding: 40px 20px;">
+      <div class="account-container admin-wide" style="margin: 0 auto;">
+          <section class="reservations-box">
+              <h2 style="font-size: 2.2em; color: #f39c12; text-align: center;">Espace Client</h2>
+              
+              <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: center;">
+                  <h3 style="margin-top: 0; color: #f0e6d2;">🔎 Retrouver mes réservations</h3>
+                  <p style="font-size: 0.9em; color: #ccc; margin-bottom: 20px;">Entrez les coordonnées utilisées lors de votre réservation.</p>
+                  
+                  <form id="clientAuthForm" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; background: transparent; padding: 0; box-shadow: none;">
+                      <input type="email" id="clientEmail" placeholder="Votre adresse email" required style="max-width: 250px;" />
+                      <input type="tel" id="clientPhone" placeholder="Votre numéro de téléphone" required style="max-width: 250px;" />
+                      <button type="submit" class="btn-premium" style="background: #f39c12; padding: 10px 20px;">Rechercher</button>
+                  </form>
+                  <p id="clientAuthMessage" style="margin-top: 15px; font-size: 0.95em;"></p>
+              </div>
+
+              <div id="clientReservationsSection" style="display: none;">
+                  <h3 style="color: #f0e6d2;">Historique de vos réservations</h3>
+                  <div class="admin-table-wrapper">
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Date</th>
+                                  <th>Heure</th>
+                                  <th>Couverts</th>
+                                  <th>Demande / Notes</th>
+                                  <th>Statut</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody id="clientTableBody">
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </section>
+      </div>
+    </main>
+
+    <script src="espace_client.js"></script>
+    <script src="nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administration - Chez Nany</title>
+    <link rel="icon" type="image/jpeg" href="./assets/logo.jpg" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <div class="logo">
+          <a href="index.html"
+            ><img src="assets/logo-light.png" class="logo-light" /><img
+              src="assets/logo-dark.png"
+              class="logo-dark"
+          /></a>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Accueil</a
+          ><a href="administration.html">Admin</a>
+        </div>
+      </nav>
+    </header>
+
+    <main style="padding: 40px 20px">
+      <div class="account-container admin-wide" style="margin: 0 auto">
+        <!-- Section Gestion Tables -->
+        <section class="reservations-box" style="margin-bottom: 50px">
+          <h2 style="color: #f39c12">⚙️ Gestion des tables</h2>
+          <form
+            id="tableForm"
+            style="display: flex; gap: 10px; margin-bottom: 20px"
+          >
+            <input
+              type="number"
+              id="tCapacite"
+              placeholder="Capacité"
+              required
+              style="width: 100px"
+            />
+            <label><input type="checkbox" id="tTerrasse" /> Terrasse</label>
+            <button type="submit" class="btn-premium">Ajouter</button>
+          </form>
+          <div
+            id="tableList"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+              gap: 10px;
+            "
+          >
+          </div>
+        </section>
+
+        <!-- Section Réservations -->
+        <section class="reservations-box">
+          <h2 style="color: #f39c12">📞 Cahier de réservations</h2>
+          <div class="admin-table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Heure</th>
+                  <th>Nom</th>
+                  <th>Couverts</th>
+                  <th>Infos</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminTableBody">
+                <tr>
+                  <td colspan="6">Chargement...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="administration.js"></script>
+  </body>
+</html>

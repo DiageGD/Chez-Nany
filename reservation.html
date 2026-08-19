@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Réserver une table - Chez Nany</title>
+    <link rel="icon" type="image/jpeg" href="./assets/logo.jpg">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Parisienne&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <nav class="main-nav">
+        <div class="logo">
+          <a href="index.html">
+            <img
+              src="assets/logo-light.png"
+              alt="Logo clair"
+              class="logo-light"
+            />
+            <img
+              src="assets/logo-dark.png"
+              alt="Logo foncé"
+              class="logo-dark"
+            />
+          </a>
+        </div>
+
+        <div class="nav-links">
+          <a href="index.html">Accueil</a>
+          <a href="about.html">Présentation du restaurant</a>
+          <a href="assets/Menu.pdf" target="_blank">Voir la carte</a>
+          <a href="reservation.html">Réserver une table</a>
+          <a href="contact.html">Où nous trouver ?</a>
+          <a href="espace_client.html">Mon espace</a>
+        </div>
+
+        <button class="nav-toggle">☰</button>
+      </nav>
+    </header>
+
+    <main style="display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
+      <div class="auth-container">
+        <h1>Réserver une table</h1>
+        <p style="font-family: 'Inter', sans-serif; color: #e0d4b8; margin-bottom: 25px;">
+          Réservez votre moment d'exception en quelques instants.
+        </p>
+        
+        <form id="reservationForm" style="background: transparent; padding: 0; box-shadow: none;">
+          <div class="form-group">
+            <label for="firstname">Prénom</label>
+            <input type="text" id="firstname" required />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Nom</label>
+            <input type="text" id="lastname" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Numéro de téléphone</label>
+            <input type="tel" id="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="people">Nombre de personnes</label>
+            <input type="number" id="people" min="1" max="10" required />
+          </div>
+          <div class="form-group">
+            <label for="date">Date de votre visite</label>
+            <input type="date" id="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Créneau horaire</label>
+            <select id="time" required>
+              <option value="" disabled selected>Choisissez d'abord une date</option>
+            </select>
+          </div>
+          <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px;">
+            <input type="checkbox" id="terrace" style="width: auto;" />
+            <label for="terrace" style="margin: 0; cursor: pointer;">Préférence en terrasse</label>
+          </div>
+          <div class="form-group">
+            <label for="notes">Demande particulière (Optionnel)</label>
+            <textarea id="notes" placeholder="Allergies, anniversaire, etc." rows="3" style="width:100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(240, 230, 210, 0.3); background: rgba(0,0,0,0.5); color: #fff;"></textarea>
+          </div>
+
+          <button type="submit" class="btn-premium">Confirmer la réservation</button>
+        </form>
+
+        <p id="message" style="margin-top: 15px; font-family:'Inter', sans-serif; font-size: 0.95em;"></p>
+      </div>
+    </main>
+    
+    <script src="reservation.js"></script>
+    <script src="nav.js" defer></script>
+  </body>
+</html>
