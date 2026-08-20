@@ -1,10 +1,8 @@
-from fastapi import FastAPI, HTTPException, status, Security
+from fastapi import FastAPI, HTTPException, status, Security, Header
 from fastapi.security import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
 from database import supabase, ADMIN_API_KEY
-from schemas import ReservationCreate, REOPENING_DATE
-from schemas import TableCreate
-from schemas import ClientAuth
+from schemas import ReservationCreate, REOPENING_DATE, TableCreate, ClientAuth
 
 app = FastAPI(
     title="API Chez Nany",
@@ -109,7 +107,6 @@ def create_reservation(payload: ReservationCreate):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur interne : {str(e)}")
 
-
 @app.get("/api/reservations", dependencies=[Security(verify_admin_key)])
 def get_all_reservations():
     try:
@@ -174,23 +171,23 @@ def cancel_client_reservation(reservation_id: int, auth: ClientAuth):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur interne: {str(e)}")
 
-@app.post("/api/tables")
-def create_table(table: schemas.TableCreate, admin_key: str = Header(None, alias="X-Admin-Key")):
-    verify_admin(admin_key)
-    
-    # Génération automatique d'un nom pour satisfaire la contrainte Supabase
-    location_name = "Terrasse" if table.is_terrace else "Intérieur"
-    auto_name = f"Table {table.capacity}p ({location_name})"
+@app.post("/api/tables", dependencies=[Security(verify_admin_key)])
+def create_table(table: TableCreate):
+    try:
+        location_name = "Terrasse" if table.is_terrace else "Intérieur"
+        auto_name = f"Table {table.capacity}p ({location_name})"
 
-    table_data = {
-        "name": auto_name,
-        "capacity": table.capacity,
-        "is_terrace": table.is_terrace,
-        "is_active": table.is_active
-    }
+        table_data = {
+            "name": auto_name,
+            "capacity": table.capacity,
+            "is_terrace": table.is_terrace,
+            "is_active": table.is_active
+        }
 
-    res = supabase.table("restaurant_tables").insert(table_data).execute()
-    return res.data
+        res = supabase.table("restaurant_tables").insert(table_data).execute()
+        return res.data
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erreur BDD: {str(e)}")
 
 @app.put("/api/tables/{table_id}", dependencies=[Security(verify_admin_key)])
 def update_table(table_id: int, table: TableCreate):
