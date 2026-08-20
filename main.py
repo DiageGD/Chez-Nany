@@ -174,13 +174,23 @@ def cancel_client_reservation(reservation_id: int, auth: ClientAuth):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur interne: {str(e)}")
 
-@app.post("/api/tables", dependencies=[Security(verify_admin_key)])
-def create_table(table: TableCreate):
-    try:
-        response = supabase.table("restaurant_tables").insert(table.model_dump()).execute()
-        return {"message": "Table ajoutée avec succès", "table": response.data[0]}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.post("/api/tables")
+def create_table(table: schemas.TableCreate, admin_key: str = Header(None, alias="X-Admin-Key")):
+    verify_admin(admin_key)
+    
+    # Génération automatique d'un nom pour satisfaire la contrainte Supabase
+    location_name = "Terrasse" if table.is_terrace else "Intérieur"
+    auto_name = f"Table {table.capacity}p ({location_name})"
+
+    table_data = {
+        "name": auto_name,
+        "capacity": table.capacity,
+        "is_terrace": table.is_terrace,
+        "is_active": table.is_active
+    }
+
+    res = supabase.table("restaurant_tables").insert(table_data).execute()
+    return res.data
 
 @app.put("/api/tables/{table_id}", dependencies=[Security(verify_admin_key)])
 def update_table(table_id: int, table: TableCreate):
