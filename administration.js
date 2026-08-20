@@ -4,41 +4,87 @@ document.addEventListener("DOMContentLoaded", () => {
     let adminKey = localStorage.getItem("admin_key") || prompt("Mot de passe Admin :");
     if (adminKey) localStorage.setItem("admin_key", adminKey);
 
-    const headers = { "X-Admin-Key": adminKey, "Content-Type": "application/json" };
+    const getHeaders = () => ({
+        "X-Admin-Key": localStorage.getItem("admin_key") || adminKey,
+        "Content-Type": "application/json"
+    });
+
     const adminTableBody = document.getElementById("adminTableBody");
 
+    // 1. Charger les tables
     async function loadTables() {
-        const res = await fetch(`${API_URL}/api/tables`);
-        const tables = await res.json();
-        const container = document.getElementById("tableList");
-        container.innerHTML = tables.map(t => `
-            <div style="background:#333; padding:10px; border-radius:5px; text-align:center;">
-                <strong>${t.capacity} pers</strong><br>${t.is_terrace ? 'Terrasse' : 'Intérieur'}<br>
-                <button onclick="deleteTable(${t.id})" style="background:#e74c3c; border:none; color:white; padding:5px; cursor:pointer;">Supprimer</button>
-            </div>
-        `).join("");
+        try {
+            const res = await fetch(`${API_URL}/api/tables`);
+            const tables = await res.json();
+            const container = document.getElementById("tableList");
+            if (!container) return;
+
+            container.innerHTML = tables.map(t => `
+                <div style="background:#333; padding:10px; border-radius:5px; text-align:center;">
+                    <strong>${t.capacity} pers</strong><br>${t.is_terrace ? 'Terrasse' : 'Intérieur'}<br>
+                    <button onclick="deleteTable(${t.id})" style="background:#e74c3c; border:none; color:white; padding:5px; margin-top:5px; cursor:pointer; border-radius:3px;">Supprimer</button>
+                </div>
+            `).join("");
+        } catch (err) {
+            console.error("Erreur de chargement des tables :", err);
+        }
     }
 
-    document.getElementById("tableForm").onsubmit = async (e) => {
-        e.preventDefault();
-        await fetch(`${API_URL}/api/tables`, {
-            method: "POST", headers,
-            body: JSON.stringify({
-                capacity: parseInt(document.getElementById("tCapacite").value),
-                is_terrace: document.getElementById("tTerrasse").checked,
-                is_active: true
-            })
+    // 2. Ajouter une table
+    const tableForm = document.getElementById("tableForm");
+    if (tableForm) {
+        tableForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const capacity = parseInt(document.getElementById("tCapacite").value, 10);
+            const is_terrace = document.getElementById("tTerrasse").checked;
+
+            try {
+                const response = await fetch(`${API_URL}/api/tables`, {
+                    method: "POST",
+                    headers: getHeaders(),
+                    body: JSON.stringify({
+                        capacity: capacity,
+                        is_terrace: is_terrace,
+                        is_active: true
+                    })
+                });
+
+                if (response.ok) {
+                    tableForm.reset();
+                    loadTables();
+                } else {
+                    const err = await response.json();
+                    alert("❌ Erreur : " + (err.detail || "Impossible d'ajouter la table."));
+                }
+            } catch (err) {
+                alert("❌ Erreur de connexion avec le serveur.");
+            }
         });
-        loadTables();
-    };
+    }
 
+    // 3. Supprimer une table
     window.deleteTable = async (id) => {
-        if(!confirm("Supprimer cette table ?")) return;
-        await fetch(`${API_URL}/api/tables/${id}`, { method: "DELETE", headers });
-        loadTables();
+        if (!confirm("Supprimer cette table ?")) return;
+        try {
+            const response = await fetch(`${API_URL}/api/tables/${id}`, {
+                method: "DELETE",
+                headers: getHeaders()
+            });
+
+            if (response.ok) {
+                loadTables();
+            } else {
+                alert("Impossible de supprimer la table.");
+            }
+        } catch (err) {
+            alert("Erreur serveur.");
+        }
     };
 
+    // 4. Charger les réservations
     async function loadReservations() {
+        if (!adminTableBody) return;
         if (!adminKey) {
             adminTableBody.innerHTML = `<tr><td colspan="6" style="color:red;">Mot de passe requis. Veuillez rafraîchir la page.</td></tr>`;
             return;
@@ -46,9 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
             const response = await fetch(`${API_URL}/api/reservations`, {
-                headers: {
-                    "X-Admin-Key": adminKey
-                }
+                headers: getHeaders()
             });
 
             if (response.status === 401) {
@@ -60,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!response.ok) throw new Error("Erreur serveur");
 
-            localStorage.setItem("admin_key", adminKey);
             const reservations = await response.json();
 
             if (reservations.length === 0) {
@@ -88,15 +131,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // 5. Annuler une réservation
     window.deleteRes = async (id) => {
         if (!confirm("Voulez-vous vraiment annuler cette réservation ?")) return;
 
         try {
             const response = await fetch(`${API_URL}/api/reservations/${id}`, {
                 method: 'DELETE',
-                headers: {
-                    "X-Admin-Key": adminKey
-                }
+                headers: getHeaders()
             });
 
             if (response.ok) {
@@ -108,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Erreur lors de la communication avec le serveur.");
         }
     };
-    
+
     loadTables();
     loadReservations();
 });
